@@ -69,7 +69,7 @@ function App() {
   return (
     <>
       <div className="container">
-        <Filter />
+        <Filter onFilterChange={() => {}} />
         <h1 id="Catalogue">Catalogue</h1>
         <table {...getTableProps()}>
           <thead>
