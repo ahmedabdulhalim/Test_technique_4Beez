@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useTable, useSortBy } from 'react-table';
 import Filter from './Filter';
 import axios from 'axios';
-import {  Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Link } from 'react-router-dom'
+import Item from './Item';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 function App() {
@@ -24,43 +26,39 @@ function App() {
   const columns = React.useMemo(
     () => [
       {
-        Header: 'id',
-        accessor: 'id',
-      },
-      {
         Header: 'Titre',
-        accessor: 'attributes.titles.en',
+        accessor: row => row.attributes && row.attributes.titles.en || 'Pas disponible',
       },
       {
         Header: 'Titre en japonnais',
-        accessor: 'attributes.titles.ja_jp',
+        accessor: row => row.attributes && row.attributes.titles.ja_jp || 'Pas disponible',
       },
       {
         Header: 'Age recommandé',
-        accessor: 'attributes.ageRatingGuide',
+        accessor: row => row.attributes && row.attributes.ageRatingGuide || 'Pas disponible',
       },
       {
         Header: 'Date de sortie',
-        accessor: 'attributes.startDate',
+        accessor: row => row.attributes && row.attributes.startDate || 'Pas disponible',
       },
       {
         Header: 'Rang',
-        accessor: 'attributes.ratingRank',
+        accessor: row => row.attributes && row.attributes.ratingRank || 'Pas disponible',
       },
-      {
+  /*     {
         Header: 'Details',
         accessor: 'id',
         Cell: ({ cell: { value } }) => (
-          <Link to={`/anime/${value}`}>
-            <button>Détails</button>
+          <Link to={`/item/${value}`}>
+            <button>Details</button>
           </Link>
         ),
-      },
-      
-   
+      },  */
+  
     ],
     []
   );
+  
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable(
     { columns, data },
